@@ -5,6 +5,7 @@ import 'package:breathing_app/ui/features/activity/bloc/activity_state.dart';
 import 'package:breathing_app/ui/features/activity/widgets/breathing_activity_view.dart';
 import 'package:breathing_app/ui/features/activity/widgets/countdown_view.dart';
 import 'package:breathing_app/ui/features/completed/completed_screen.dart';
+import 'package:breathing_app/ui/global_widgets/responsive_container.dart';
 import 'package:breathing_app/ui/global_widgets/spacings.dart';
 import 'package:breathing_app/ui/global_widgets/theme_change_button.dart';
 import 'package:flutter/material.dart';
@@ -59,35 +60,38 @@ class _ActivityView extends StatelessWidget {
           ),
           actions: [ThemeChangeButton(), HSpacer(16)],
         ),
-        body: BlocBuilder<ActivityCubit, ActivityState>(
-          buildWhen: (prev, curr) =>
-              prev.isCountdownComplete != curr.isCountdownComplete,
-          builder: (context, state) {
-            return AnimatedCrossFade(
-              firstChild: CountdownView(
-                onComplete: () =>
-                    context.read<ActivityCubit>().onCountdownComplete(),
-              ),
-              secondChild: const BreathingActivityView(),
-              crossFadeState: state.isCountdownComplete
-                  ? CrossFadeState.showSecond
-                  : CrossFadeState.showFirst,
-              duration: const Duration(milliseconds: 500),
-              layoutBuilder:
-                  (topChild, topChildKey, bottomChild, bottomChildKey) {
-                    return Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Positioned.fill(
-                          key: bottomChildKey,
-                          child: bottomChild,
-                        ),
-                        Positioned.fill(key: topChildKey, child: topChild),
-                      ],
-                    );
-                  },
-            );
-          },
+        body: ResponsiveContainer(
+          maxWidth: 500,
+          child: BlocBuilder<ActivityCubit, ActivityState>(
+            buildWhen: (prev, curr) =>
+                prev.isCountdownComplete != curr.isCountdownComplete,
+            builder: (context, state) {
+              return AnimatedCrossFade(
+                firstChild: CountdownView(
+                  onComplete: () =>
+                      context.read<ActivityCubit>().onCountdownComplete(),
+                ),
+                secondChild: const BreathingActivityView(),
+                crossFadeState: state.isCountdownComplete
+                    ? CrossFadeState.showSecond
+                    : CrossFadeState.showFirst,
+                duration: const Duration(milliseconds: 500),
+                layoutBuilder:
+                    (topChild, topChildKey, bottomChild, bottomChildKey) {
+                      return Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Positioned.fill(
+                            key: bottomChildKey,
+                            child: bottomChild,
+                          ),
+                          Positioned.fill(key: topChildKey, child: topChild),
+                        ],
+                      );
+                    },
+              );
+            },
+          ),
         ),
       ),
     );

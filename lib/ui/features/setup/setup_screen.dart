@@ -6,6 +6,7 @@ import 'package:breathing_app/ui/features/setup/bloc/setup_state.dart';
 import 'package:breathing_app/ui/features/setup/widgets/advanced_timing.dart';
 import 'package:breathing_app/ui/features/setup/widgets/selection_chip.dart';
 import 'package:breathing_app/ui/features/setup/widgets/sound_selector.dart';
+import 'package:breathing_app/ui/global_widgets/responsive_container.dart';
 import 'package:breathing_app/ui/global_widgets/spacings.dart';
 import 'package:breathing_app/ui/global_widgets/theme_change_button.dart';
 import 'package:breathing_app/ui/theme/app_colors.dart';
@@ -36,7 +37,8 @@ class _SetupView extends StatelessWidget {
         backgroundColor: Colors.transparent,
         actions: [ThemeChangeButton(), HSpacer(16)],
       ),
-      body: SizedBox.expand(
+      body: ResponsiveContainer(
+        maxWidth: 500,
         child: SingleChildScrollView(
           padding: .symmetric(horizontal: 27),
           child: Column(
