@@ -23,4 +23,7 @@ class AppColors {
   static const Color bgAccentSubtleDark = Color(0xFF5C2D00);
 
   static const Color bgChipNeutral = Color(0xFF424242);
+
+  static const Color bgBubble = Color(0xFF7B2D8E);
+  static const Color bgBubbleDark = Color(0xFFC97CF5);
 }

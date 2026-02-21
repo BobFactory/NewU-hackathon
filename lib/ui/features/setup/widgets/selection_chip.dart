@@ -6,12 +6,14 @@ class SelectionChip extends StatelessWidget {
   final String label;
   final bool isSelected;
   final VoidCallback onTap;
+  final EdgeInsetsGeometry? padding;
 
   const SelectionChip({
     super.key,
     required this.label,
     required this.isSelected,
     required this.onTap,
+    this.padding,
   });
 
   @override
@@ -35,7 +37,8 @@ class SelectionChip extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 11, horizontal: 22),
+        padding:
+            padding ?? const EdgeInsets.symmetric(vertical: 11, horizontal: 22),
         decoration: BoxDecoration(
           color: bgColor,
           borderRadius: BorderRadius.circular(100),
